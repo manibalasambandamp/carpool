@@ -54,9 +54,9 @@ namespace CarPool
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "335018690198794",
+               appSecret: "ee4c36feca19479b1aabf701f49b9992");
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
