@@ -41,6 +41,9 @@
                         <input type="submit" value="Log in" class="btn btn-default" />
                     </div>
                 </div>
+                <fb:login-button scope="public_profile,email"
+                                 onlogin="checkLoginState();">
+                </fb:login-button>
                 <p>
                     @Html.ActionLink("Register as a new user", "Register")
                 </p>
