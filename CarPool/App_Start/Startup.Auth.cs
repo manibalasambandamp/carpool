@@ -58,11 +58,11 @@ namespace CarPool
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "513782920106-a8mrpgmv2d81idm99g4hbatc0flj38bs.apps.googleusercontent.com",
+                ClientSecret = "DpfRI_fk6H7BxQtvkITBXFZI"
+            });
         }
     }
 }
