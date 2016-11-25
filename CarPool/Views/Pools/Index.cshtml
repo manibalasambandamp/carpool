@@ -1,0 +1,93 @@
+﻿@model IEnumerable<CarPool.Models.Pool>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fromAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fromZip)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.toAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.toZip)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.carType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.carNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seatsToOffer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isDaily)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.startDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.endDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.startTime)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fromAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fromZip)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.toAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.toZip)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.carType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.carNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.seatsToOffer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isDaily)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.startDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.endDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.startTime)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

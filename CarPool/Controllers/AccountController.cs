@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CarPool.Models;
+using System.IO;
 
 namespace CarPool.Controllers
 {
@@ -147,11 +148,35 @@ namespace CarPool.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register([Bind(Exclude = "ProfilePic")]RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                
+                byte[] imageData = null;
+                if (Request.Files.Count > 0)
+                {
+                    HttpPostedFileBase poImgFile = Request.Files["ProfilePic"];
+
+                    using (var binary = new BinaryReader(poImgFile.InputStream))
+                    {
+                        imageData = binary.ReadBytes(poImgFile.ContentLength);
+                    }
+                }
+               
+                model.ProfilePic = imageData;
+
+                var user = new ApplicationUser {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    Name = model.Name,
+                    Dob = model.Dob,
+                    CarType = model.CarType,
+                    IdProof = model.IdProof,
+                    Address = model.Address,
+                    PhoneNum = model.PhoneNum,
+                    ProfilePic = model.ProfilePic
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -352,7 +377,7 @@ namespace CarPool.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
+        public async Task<ActionResult> ExternalLoginConfirmation([Bind(Exclude = "ProfilePic")]ExternalLoginConfirmationViewModel model, string returnUrl)
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -367,7 +392,31 @@ namespace CarPool.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+
+                byte[] imageData = null;
+                if (Request.Files.Count > 0)
+                {
+                    HttpPostedFileBase poImgFile = Request.Files["ProfilePic"];
+
+                    using (var binary = new BinaryReader(poImgFile.InputStream))
+                    {
+                        imageData = binary.ReadBytes(poImgFile.ContentLength);
+                    }
+                }
+
+                model.ProfilePic = imageData;
+
+                var user = new ApplicationUser {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    Name = model.Name,
+                    Dob = model.Dob,
+                    CarType = model.CarType,
+                    IdProof = model.IdProof,
+                    Address = model.Address,
+                    PhoneNum = model.PhoneNum,
+                    ProfilePic = model.ProfilePic
+                };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -402,6 +451,7 @@ namespace CarPool.Controllers
         {
             return View();
         }
+
 
         protected override void Dispose(bool disposing)
         {

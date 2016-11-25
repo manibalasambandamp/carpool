@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace CarPool.Models
@@ -8,6 +10,33 @@ namespace CarPool.Models
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Required]
+        [DisplayName("Name")]
+        public string Name { get; set; }
+
+        [Required]
+        [DisplayName("License No./Other Id")]
+        public string IdProof { get; set; }
+
+        [DisplayName("Date of Birth")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
+        public DateTime Dob { get; set; }
+
+        [DisplayName("Car Type")]
+        public string CarType { get; set; }
+
+        [DisplayName("Address")]
+        public string Address { get; set; }
+
+        [DisplayName("Phone Number")]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid Phone number")]
+        public string PhoneNum { get; set; }
+
+        [DisplayName("Profile Picture")]
+        public byte[] ProfilePic { get; set; }
     }
 
     public class ExternalLoginListViewModel
@@ -79,6 +108,33 @@ namespace CarPool.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [DisplayName("Name")]
+        public string Name { get; set; }
+
+        [Required]
+        [DisplayName("License No./Other Id")]
+        public string IdProof { get; set; }
+
+        [DisplayName("Date of Birth")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
+        public DateTime Dob { get; set; }
+
+        [DisplayName("Car Type")]
+        public string CarType { get; set; }
+
+        [DisplayName("Address")]
+        public string Address { get; set; }
+
+        [DisplayName("Phone Number")]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid Phone number")]
+        public string PhoneNum { get; set; }
+
+        [DisplayName("Profile Picture")]
+        public byte[] ProfilePic { get; set; }
     }
 
     public class ResetPasswordViewModel
