@@ -18,18 +18,24 @@ namespace CarPool.Controllers
         // GET: Pools
         public ActionResult Index()
         {
-            var pools = db.Pools.Where(p => p.host == User.Identity.Name);
-            return View(pools.ToList());
+            var hostedPools = db.Pools.Where(p => p.host == User.Identity.Name);
+            var joinedPools = db.Pools.Where(p => p.members.Contains(User.Identity.Name));
+            IEnumerable<Pool> poolList = new List<Pool>();
+            poolList = poolList.Concat(hostedPools.ToList());
+            poolList = poolList.Concat(joinedPools.ToList());
+
+            return View(poolList);
         }
 
         // GET: Pools/Details/5
         public ActionResult Details(int? id)
         {
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pool pool = db.Pools.FirstOrDefault(p=>p.host == User.Identity.Name && p.Id == id);
+            Pool pool = db.Pools.FirstOrDefault(p =>p.Id == id);
             if (pool == null)
             {
                 return HttpNotFound();
@@ -90,6 +96,7 @@ namespace CarPool.Controllers
 
             if (ModelState.IsValid)
             {
+                pool.members = db.Pools.FirstOrDefault(p => p.Id == pool.Id).members;
                 pool.host = User.Identity.Name;
                 db.Entry(pool).State = EntityState.Modified;
                 db.SaveChanges();
@@ -122,6 +129,73 @@ namespace CarPool.Controllers
             db.Pools.Remove(pool);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        // GET: Search
+        public ActionResult Search(string fromAddress, string fromZip,String toAddress,String toZip,String poolDate)
+        {
+            try
+            {
+                // flag if search has been performed
+                bool searchPerformed = false;
+
+                var pools = db.Pools.Where(p => p.host != User.Identity.Name && (p.members == null || !p.members.Contains(User.Identity.Name)));
+
+                if (!string.IsNullOrWhiteSpace(fromAddress))
+                {
+                    pools = pools.Where(p => p.fromAddress == fromAddress );
+                    searchPerformed = true;
+                }
+
+                if (!string.IsNullOrWhiteSpace(fromZip))
+                {
+                    pools = pools.Where(p => p.fromZip == fromZip );
+                    searchPerformed = true;
+                }
+
+                if (!string.IsNullOrWhiteSpace(toAddress))
+                {
+                    pools = pools.Where(p => p.toAddress == toAddress );
+                    searchPerformed = true;
+                }
+
+                if (!string.IsNullOrWhiteSpace(toZip))
+                {
+                    pools = pools.Where(p => p.toZip == toZip);
+                    searchPerformed = true;
+                }
+
+                if (!string.IsNullOrWhiteSpace(poolDate))
+                {
+                    DateTime poolDateValue = DateTime.Parse(poolDate);
+                    pools = pools.Where(p => p.startDate == poolDateValue);
+                    searchPerformed = true;
+                }
+
+                if (searchPerformed)
+                {
+                    // return search results
+                    return View(pools.ToList());
+                }
+                else
+                {
+                    // return empty list
+                    return View(new List<Pool>());
+                }
+            }
+            catch (Exception e)
+            {
+                return View(new List<Pool>());
+            }
+        }
+
+        public ActionResult Join(int? id) {
+            Pool pool = db.Pools.FirstOrDefault(p => p.Id == id);
+            
+            pool.members = pool.members + "#" + User.Identity.Name;
+            db.Entry(pool).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Details", new { id = pool.Id });
         }
 
         protected override void Dispose(bool disposing)

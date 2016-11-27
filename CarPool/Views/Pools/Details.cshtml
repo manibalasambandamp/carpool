@@ -98,6 +98,18 @@
             @Html.DisplayFor(model => model.startTime)
         </dd>
 
+        <dt>
+            Seats Available
+        </dt>
+
+       
+            @{
+                String members = String.IsNullOrEmpty(Model.members) ? "" : Model.members;
+                int seats = Model.seatsToOffer - (members.Split('#').Length-1);
+                <dd>
+                    @seats
+                </dd>
+             }
     </dl>
 </div>
 <p>

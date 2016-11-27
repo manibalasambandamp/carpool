@@ -1,0 +1,151 @@
+﻿@model IEnumerable<CarPool.Models.Pool>
+
+@{
+    ViewBag.Title = "Search";
+}
+<div class="container body-content">
+    <h2>Search</h2>
+    
+    @using (Html.BeginForm("search", "Pools", FormMethod.Get))
+    {
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.Label("fromAddress", "From Address", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Editor("fromAddress", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("fromZip", "From Zip", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Editor("fromZip", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("toAddress", "To Address", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Editor("toAddress", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("toZip", "To Zip", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Editor("toZip", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("poolDate", "Pool Date", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Editor("poolDate", new { htmlAttributes = new { @class = "form-control" } })
+                    (MM/DD/YYYY) Format
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Search" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.fromAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fromZip)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.toAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.toZip)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.carType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.carNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.seatsToOffer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isDaily)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.startDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.endDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.startTime)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fromAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fromZip)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.toAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.toZip)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.carType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.carNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.seatsToOffer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.isDaily)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.startDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.endDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.startTime)
+                </td>
+                
+                    @if (item.host.Equals(User.Identity.Name))
+                    {
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            
+                        </td>
+                    }
+                    else if((""+item.members).Split('#').Length < item.seatsToOffer)
+                    {
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { id = item.Id })|
+                            @Html.ActionLink("Join", "Join", new { id = item.Id })
+                        </td>
+                    }
+                    else 
+                    {
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { id = item.Id })
+                        </td>
+                    }
+            </tr>
+        }
+
+    </table>
+</div> 

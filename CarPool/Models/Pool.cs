@@ -11,11 +11,12 @@ namespace CarPool.Models
     [CustomValidation(typeof(Pool), "ValidateEndDate")]
     public class Pool
     {
+
         public int Id { get; set; }
 
         public string host { get; set; }
 
-        public List<string> members { get; set; }
+        public string members { get; set; }
 
         [Required]
         [DisplayName("From Address")]
