@@ -17,15 +17,18 @@ namespace CarPool.Controllers
 
         // GET: Pools
         public ActionResult Index()
+
+
         {
             var hostedPools = db.Pools.Where(p => p.host == User.Identity.Name);
-            var joinedPools = db.Pools.Where(p => p.members.Contains(User.Identity.Name));
-            IEnumerable<Pool> poolList = new List<Pool>();
-            poolList = poolList.Concat(hostedPools.ToList());
+        var joinedPools = db.Pools.Where(p => p.members.Contains(User.Identity.Name));
+        IEnumerable<Pool> poolList = new List<Pool>();
+        poolList = poolList.Concat(hostedPools.ToList());
             poolList = poolList.Concat(joinedPools.ToList());
 
             return View(poolList);
-        }
+    }
+
 
         // GET: Pools/Details/5
         public ActionResult Details(int? id)

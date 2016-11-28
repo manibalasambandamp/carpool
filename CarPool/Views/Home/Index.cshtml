@@ -1,7 +1,11 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-
+<style>
+    span.highlight {
+        background-color: #2A9FD6;
+    }
+</style>
 <!-- Carousel
    ================================================== -->
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -13,13 +17,13 @@
     </ol>
     <div class="carousel-inner" role="listbox">
         <div class="item active">
-            <img class="first-slide" src="~/Images/moneyman.jpg" alt="First slide">
+            <img class="first-slide" src="~/Images/banner3.jpg" alt="First slide">
             <div class="container">
                 <div class="carousel-caption">
                     <h1>Did You Know That ?</h1>
-                    <p>The average carpooler can cut out as much as $600 each month on the cost of their commuting drive</p>
+                    <p><span class="highlight">The average carpooler can cut out as much as $600 each month on the cost of their commuting drive</span></p>
                     <p>
-                    @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" ,@class = "btn btn-lg btn-primary" })
+                        @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-lg btn-primary" })
                     </p>
                 </div>
             </div>
@@ -29,17 +33,17 @@
             <div class="container">
                 <div class="carousel-caption">
                     <h1>Or That?</h1>
-                    <p>By carpooling just twice a week, 1,600 pounds of greenhouse gases can be kept out of the air each year</p>
+                    <p><span class="highlight">By carpooling just twice a week, 1,600 pounds of greenhouse gases can be kept out of the air each year</span></p>
                     <p>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-lg btn-primary" })</p>
                 </div>
             </div>
         </div>
         <div class="item">
-            <img class="third-slide" src="~/Images/save-bear.jpg" alt="Third slide">
+            <img class="third-slide" src="~/Images/Baby-Pandas-22.jpg" alt="Third slide">
             <div class="container">
                 <div class="carousel-caption">
                     <h1>Which Means...</h1>
-                    <p>The climate change is the biggest threat to survival of polar bears and you can change it</p>
+                    <p><span class="highlight">The climate change is the biggest threat to survival of pandas and you can change it</span></p>
                     <p>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-lg btn-primary" })</p>
                 </div>
             </div>
@@ -61,53 +65,50 @@
     <!-- Three columns of text below the carousel -->
     <div class="row">
         <div class="col-lg-4">
-            <img class="img-circle" src="~/Images/CAR-POOLING.jpg" alt="Generic placeholder image" width="140" height="140">
+            <img class="img-circle" src="~/Images/hand.jpg" alt="Generic placeholder image" width="140" height="140">
             <h2>Host</h2>
-            <p>If you have got a ride to share, come forward and create a pool.</p>
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            <p><a class="btn btn-default" href="#host" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
-            <img class="img-circle" src="~/Images/nexus2cee_unnamed6.png" alt="Generic placeholder image" width="140" height="140">
+            <img class="img-circle" src="~/Images/girl-asking-for-lift.jpg" alt="Generic placeholder image" width="140" height="140">
             <h2>Request</h2>
-            <p>If you do not have a car, do not worry.Create a ride request.</p>
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            <p><a class="btn btn-default" href="#request" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
-            <img class="img-circle" src="~/Images/Carpooling.png" alt="Generic placeholder image" width="140" height="140">
+            <img class="img-circle" src="~/Images/roadtrip.jpg" alt="Generic placeholder image" width="140" height="140">
             <h2>Group</h2>
-            <p>Create a private group with your friends or colleagues where you can share rides</p>
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            <p><a class="btn btn-default" href="#group" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
     </div><!-- /.row -->
     <!-- START THE FEATURETTES -->
     <hr class="featurette-divider">
     <div class="row featurette">
-        <div class="col-md-7">
-            <h2 class="featurette-heading">Social Website Login <span class="text-muted">It'll blow your mind.</span></h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+        <div class="col-md-7" id="host">
+            <h2 class="featurette-heading"><a href="~/Pools/Create"> Host a Ride <span class="text-muted">  Save a Panda! </span></a></h2>
+            <p class="lead">Create a one-time or daily ride. Use your car, get some people to join you and start sharing and saving right away!!!</p>
         </div>
         <div class="col-md-5">
-            <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+            <img class="featurette-image img-responsive center-block" src="~/Images/carpool_icon.jpg" alt="Generic placeholder image">
         </div>
     </div>
     <hr class="featurette-divider">
     <div class="row featurette">
-        <div class="col-md-7 col-md-push-5">
-            <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+        <div class="col-md-7 col-md-push-5" id="request">
+            <h2 class="featurette-heading"><a href="~/Pools/Request">  Request a ride.<span class="text-muted">You don't have a car? Just ask</span></a></h2>
+            <p class="lead">Log a one-time or a regular ride request and we will match you with a host in no time!!! </p>
         </div>
         <div class="col-md-5 col-md-pull-7">
-            <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+            <img class="featurette-image img-responsive center-block" src="~/Images/girl-on-the-road-wants-lift.jpg" alt="Generic placeholder image">
         </div>
     </div>
     <hr class="featurette-divider">
     <div class="row featurette">
-        <div class="col-md-7">
-            <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+        <div class="col-md-7" id="group">
+            <h2 class="featurette-heading"><a href="~/Pools/Group">Groups!! <span class="text-muted">Share rides with friends</span></a></h2>
+            <p class="lead">Use this option to plan trips and daily commutes with friends. Add buddies and share rides within your group</p>
         </div>
         <div class="col-md-5">
-            <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+            <img class="featurette-image img-responsive center-block" src="~/Images/636013546659815982960005097_o-ROAD-TRIP-facebook.jpg" alt="Generic placeholder image">
         </div>
     </div>
     <hr class="featurette-divider">

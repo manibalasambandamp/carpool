@@ -90,9 +90,11 @@ namespace CarPool.Models
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
     }
-
+    [CustomValidation(typeof(RegisterViewModel), "ValidateAge")]
     public class RegisterViewModel
     {
+       
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -135,6 +137,42 @@ namespace CarPool.Models
 
         [DisplayName("Profile Picture")]
         public byte[] ProfilePic { get; set; }
+
+        public static ValidationResult ValidateAge(RegisterViewModel user, ValidationContext context)
+        {
+            DateTime Dob = user.Dob;
+            DateTime now = DateTime.Now;
+            int currentyear = now.Year;
+            int Age;
+            int birthYear = Dob.Year;
+            if (Dob.Month > now.Month)
+            {
+                Age = currentyear - birthYear - 1;
+            }
+            else if (Dob.Month < now.Month)
+            {
+                Age = currentyear - birthYear;
+            }
+            else if (Dob.Day > now.Day)
+            {
+                Age = currentyear - birthYear - 1;
+            }
+            else
+                Age = currentyear - birthYear;
+            if (Age < 16)
+            {
+                return new ValidationResult("You need to be atleast 16 years old");
+            }
+            else if (Age > 95)
+            {
+                return new ValidationResult("You need to be less than 95 years old ");
+            }
+            else
+                return ValidationResult.Success;
+        }
+        
+
+
     }
 
     public class ResetPasswordViewModel

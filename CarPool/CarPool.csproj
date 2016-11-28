@@ -233,13 +233,23 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\636013546659815982960005097_o-ROAD-TRIP-facebook.jpg" />
+    <Content Include="Images\Baby-Pandas-22.jpg" />
+    <Content Include="Images\banner3.jpg" />
+    <Content Include="Images\benefitsofgreencar.jpg" />
     <Content Include="Images\CAR-POOLING.jpg" />
     <Content Include="Images\Carpooling.png" />
-    <Content Include="Images\moneyman.jpg" />
+    <Content Include="Images\carpool_icon.jpg" />
+    <Content Include="Images\girl-asking-for-lift.jpg" />
+    <Content Include="Images\girl-on-the-road-wants-lift.jpg" />
+    <Content Include="Images\hand.jpg" />
+    <Content Include="Images\man-asking-for-lift.jpg" />
     <Content Include="Images\nexus2cee_unnamed6.png" />
-    <Content Include="Images\nobody.jpg" />
+    <Content Include="Images\petropump-1024_217275k.jpg" />
+    <Content Include="Images\roadtrip.jpg" />
     <Content Include="Images\save-bear.jpg" />
     <Content Include="Images\save-earth.jpg" />
+    <Content Include="Images\nobody.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -308,7 +318,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>

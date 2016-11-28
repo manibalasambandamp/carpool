@@ -34,31 +34,35 @@ namespace CarPool.Controllers
 
         [AllowAnonymous]
         public FileContentResult UserPhotos()
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                String userId = User.Identity.GetUserId();
 
-                if (userId == null)
+        {
+        
+                if (User.Identity.IsAuthenticated)
+                {
+                    String userId = User.Identity.GetUserId();
+
+                    if (userId == null)
+                    {
+                        return getDefaultPhoto();
+                    }
+                    // to get the user details to load user Image 
+                    var bdUsers = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
+                    var userImage = bdUsers.Users.Where(x => x.Id == userId).FirstOrDefault();
+                    if (userImage.ProfilePic.Length == 0)
+                    {
+                        return getDefaultPhoto();
+                    }
+
+                    return new FileContentResult(userImage.ProfilePic, "image/jpeg");
+                }
+                else
                 {
                     return getDefaultPhoto();
                 }
-                // to get the user details to load user Image 
-                var bdUsers = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
-                var userImage = bdUsers.Users.Where(x => x.Id == userId).FirstOrDefault();
-                if (userImage == null) {
-                    return getDefaultPhoto();
-                }
-
-                return new FileContentResult(userImage.ProfilePic, "image/jpeg");
-            }
-            else
-            {
-                return getDefaultPhoto();
-            }
+      
+    
         }
-
-        public FileContentResult getDefaultPhoto()
+    public FileContentResult getDefaultPhoto()
         {
             string fileName = HttpContext.Server.MapPath(@"~/Images/nobody.jpg");
 
