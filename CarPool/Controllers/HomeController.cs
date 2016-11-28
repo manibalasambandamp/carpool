@@ -15,12 +15,24 @@ namespace CarPool.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
+            
             return View();
         }
         [AllowAnonymous]
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            string msg = "";
+            try
+            {
+                HelloWorldServiceClient client = new HelloWorldServiceClient();
+                msg = client.GetMessage("Mike Liu");
+            }
+            catch (Exception e)
+            {
+                ViewBag.Message = "Your application description page.";
+                return View();
+            }
+            ViewBag.Message = msg;
 
             return View();
         }
