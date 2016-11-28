@@ -194,8 +194,8 @@ namespace CarPool.Controllers
 
         public ActionResult Join(int? id) {
             Pool pool = db.Pools.FirstOrDefault(p => p.Id == id);
-            
-            pool.members = pool.members + "#" + User.Identity.Name;
+            var user=db.Users.FirstOrDefault(p => p.UserName == User.Identity.Name);
+            pool.members = pool.members + "#" + User.Identity.Name + "," +user.PhoneNum;
             db.Entry(pool).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Details", new { id = pool.Id });

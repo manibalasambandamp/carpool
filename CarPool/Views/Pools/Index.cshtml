@@ -34,227 +34,213 @@
             {
                 count2++;
             }
-
-            {
-
-                if (count == 0)
-                {
-            <h4>You have not hosted a Carpool yet!</h4>
-
-    }
-    if (count2 == 0)
-    {
-        <h4>You have not joined a Carpool yet!</h4>
-                }
-                else
-                {
-
-  if(count>0)
-  {
-<h2>Pools Created By You</h2>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.fromAddress)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fromZip)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.toAddress)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.toZip)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.carType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.carNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.seatsToOffer)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isDaily)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.startDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.endDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.startTime)
-        </th>
-        <th>
-            Seats available
-        </th>
-        <th></th>
-    </tr>
-@foreach (var item1 in Model)
-{
-
-    if (item1.host.Equals(User.Identity.Name))
-
-    {
-        count++;
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item1.fromAddress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item1.fromZip)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item1.toAddress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item1.toZip)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item1.carType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item1.carNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item1.seatsToOffer)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item1.isDaily)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item1.startDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item1.endDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item1.startTime)
-        </td>
-                @{
-                    String members = String.IsNullOrEmpty(item.members) ? "" : item1.members;
-                    int seats = item1.seatsToOffer - (members.Split('#').Length - 1);
-
-            <td>
-                @seats
-            </td>
-                }
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
-    </tr>
-                        }
-
-                    }
-
-</table>
-                    }
-  if (count2 > 0)
-    {
-<h2>Pools You Joined</h2>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.fromAddress)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fromZip)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.toAddress)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.toZip)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.carType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.carNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.seatsToOffer)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isDaily)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.startDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.endDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.startTime)
-        </th>
-        <th>
-            Seats available
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item2 in Model)
-    {
-        if (!item2.host.Equals(User.Identity.Name))
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item2.fromAddress)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item2.fromZip)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item2.toAddress)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item2.toZip)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item2.carType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item2.carNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item2.seatsToOffer)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item2.isDaily)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item2.startDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item2.endDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item2.startTime)
-                </td>
-                @{
-                    String members = String.IsNullOrEmpty(item2.members) ? "" : item2.members;
-                    int seats = item2.seatsToOffer - (members.Split('#').Length - 1);
-
-                    <td>
-                        @seats
-                    </td>
-                }
-                <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.Id })
-                </td>
-            </tr>
-                        }
-
-                    }
+        }
     
-</table>
+        if (count == 0)
+        {
+            <h4>You have not hosted a Carpool yet!</h4>
+        }
+
+        if (count2 == 0)
+        {
+            <h4>You have not joined a Carpool yet!</h4>
+        }
+
+        if (count > 0)
+        {
+            <h2>Pools Created By You</h2>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.fromAddress)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.fromZip)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.toAddress)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.toZip)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.carType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.carNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.seatsToOffer)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.isDaily)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.startDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.endDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.startTime)
+                    </th>
+                    <th>
+                        Seats available
+                    </th>
+                    <th></th>
+                </tr>
+                @foreach (var item1 in Model)
+                {
+                    if (item1.host.Equals(User.Identity.Name))
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item1.fromAddress)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item1.fromZip)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item1.toAddress)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item1.toZip)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item1.carType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item1.carNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item1.seatsToOffer)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item1.isDaily)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item1.startDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item1.endDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item1.startTime)
+                        </td>
+                            @{
+                                String members = String.IsNullOrEmpty(item1.members) ? "" : item1.members;
+                                int seats = item1.seatsToOffer - (members.Split('#').Length - 1);
+                                <td>
+                                    @seats
+                                </td>
+                            }
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item1.Id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item1.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item1.Id })
+                        </td>
+                    </tr>
                                     }
                                 }
+                </table>
+            }
+            if (count2 > 0)
+            {
+            <h2>Pools You Joined</h2>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.fromAddress)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.fromZip)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.toAddress)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.toZip)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.carType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.carNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.seatsToOffer)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.isDaily)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.startDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.endDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.startTime)
+                    </th>
+                    <th>
+                        Seats available
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item2 in Model)
+                {
+                    if (!item2.host.Equals(User.Identity.Name))
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item2.fromAddress)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item2.fromZip)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item2.toAddress)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item2.toZip)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item2.carType)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item2.carNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item2.seatsToOffer)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item2.isDaily)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item2.startDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item2.endDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item2.startTime)
+                            </td>
+                            @{
+                                String members = String.IsNullOrEmpty(item2.members) ? "" : item2.members;
+                                int seats = item2.seatsToOffer - (members.Split('#').Length - 1);
+
+                                <td>
+                                    @seats
+                                </td>
                             }
+                            <td>
+                                @Html.ActionLink("Details", "Details", new { id = item2.Id })
+                            </td>
+                        </tr>
                         }
                     }
+        </table>
+       }
+    }
 }
