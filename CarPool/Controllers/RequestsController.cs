@@ -119,6 +119,87 @@ namespace CarPool.Controllers
             return RedirectToAction("Index");
         }
 
+        // GET: Search
+        public ActionResult Search(string fromAddress, string fromZip, String toAddress, String toZip, String poolDate)
+        {
+            try
+            {
+                // flag if search has been performed
+                bool searchPerformed = false;
+
+                var requests = db.Requests.Where(p => p.requestor != User.Identity.Name && p.isAccepted == false);
+
+                if (!string.IsNullOrWhiteSpace(fromAddress))
+                {
+                    requests = requests.Where(p => p.fromAddress == fromAddress);
+                    searchPerformed = true;
+                }
+
+                if (!string.IsNullOrWhiteSpace(fromZip))
+                {
+                    requests = requests.Where(p => p.fromZip == fromZip);
+                    searchPerformed = true;
+                }
+
+                if (!string.IsNullOrWhiteSpace(toAddress))
+                {
+                    requests = requests.Where(p => p.toAddress == toAddress);
+                    searchPerformed = true;
+                }
+
+                if (!string.IsNullOrWhiteSpace(toZip))
+                {
+                    requests = requests.Where(p => p.toZip == toZip);
+                    searchPerformed = true;
+                }
+
+                if (!string.IsNullOrWhiteSpace(poolDate))
+                {
+                    DateTime poolDateValue = DateTime.Parse(poolDate);
+                    requests = requests.Where(p => p.startDate == poolDateValue);
+                    searchPerformed = true;
+                }
+
+                if (searchPerformed)
+                {
+                    // return search results
+                    return View(requests.ToList());
+                }
+                else
+                {
+                    // return empty list
+                    return View(new List<Request>());
+                }
+            }
+            catch (Exception e)
+            {
+                return View(new List<Request>());
+            }
+        }
+
+
+        public ActionResult Offer(int? id)
+        {
+            Request request = db.Requests.FirstOrDefault(r => r.Id == id);
+            request.isAccepted = true;
+            db.Entry(request).State = EntityState.Modified;
+            db.SaveChanges();
+
+            Pool pool = new Pool();
+            pool.fromAddress = request.fromAddress;
+            pool.fromZip = request.fromZip;
+            pool.toAddress = request.toAddress;
+            pool.toZip = request.toZip;
+            pool.startDate = request.startDate;
+            pool.endDate = request.endDate;
+            pool.isDaily = request.isDaily;
+            pool.startTime = request.startTime;
+
+           // return RedirectToAction( "Create", "Pools",pool);
+
+            return View( "../Pools/Create", pool);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

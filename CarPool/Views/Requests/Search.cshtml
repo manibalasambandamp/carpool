@@ -1,13 +1,13 @@
-﻿@model IEnumerable<CarPool.Models.Pool>
+﻿@model IEnumerable<CarPool.Models.Request>
 
 @{
     ViewBag.Title = "Search";
 }
 <div class="container body-content">
     <h2>Search</h2>
-    <h6>Pools created by you or pools you are a part of will not show up in this page.</h6>
-    <h6>Look for it in @Html.ActionLink("My Pools", "Index", "Pools")</h6>
-    @using (Html.BeginForm("search", "Pools", FormMethod.Get))
+    <h6>Requests created by you will not show up in this page.</h6>
+    <h6>Look for it in @Html.ActionLink("My Requests", "Index", "Requests")</h6>
+    @using (Html.BeginForm("search", "Requests", FormMethod.Get))
     {
         <div class="form-horizontal">
             <div class="form-group">
@@ -63,15 +63,6 @@
                 @Html.DisplayNameFor(model => model.toZip)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.carType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.carNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.seatsToOffer)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.isDaily)
             </th>
             <th>
@@ -101,15 +92,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.toZip)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.carType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.carNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.seatsToOffer)
-                </td>
+               
                 <td>
                     @Html.DisplayFor(modelItem => item.isDaily)
                 </td>
@@ -122,29 +105,23 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.startTime)
                 </td>
+
+                @if (item.requestor.Equals(User.Identity.Name))
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                }
+                else 
+                {
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = item.Id })|
+                        @Html.ActionLink("Offer", "Offer", new { id = item.Id })
+                    </td>
+                }
                 
-                    @if (item.host.Equals(User.Identity.Name))
-                    {
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                            
-                        </td>
-                    }
-                    else if((""+item.members).Split('#').Length < item.seatsToOffer)
-                    {
-                        <td>
-                            @Html.ActionLink("Details", "Details", new { id = item.Id })|
-                            @Html.ActionLink("Join", "Join", new { id = item.Id })
-                        </td>
-                    }
-                    else 
-                    {
-                        <td>
-                            @Html.ActionLink("Details", "Details", new { id = item.Id })
-                        </td>
-                    }
             </tr>
         }
 

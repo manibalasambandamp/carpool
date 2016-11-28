@@ -54,12 +54,13 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pool <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li>@Html.ActionLink("My Pools", "Index", "Pools")</li>
-                                    <li>@Html.ActionLink("Create New", "Create", "Pools")</li>
+                                    <li>@Html.ActionLink("Host Pool", "Create", "Pools")</li>
                                     <li>@Html.ActionLink("Search or Join", "Search", "Pools")</li>
                                     <li role="separator" class="divider"></li>
-                                    <li class="dropdown-header">Nav header</li>
-                                    <li><a href="#">Separated link</a></li>
-                                    <li><a href="#">One more separated link</a></li>
+                                    <li class="dropdown-header">Request</li>
+                                    <li>@Html.ActionLink("My Requests", "Index", "Requests")</li>
+                                    <li>@Html.ActionLink("Request Pool", "Create", "Requests")</li>
+                                    <li>@Html.ActionLink("Search or Offer", "Search", "Requests")</li>
                                 </ul>
                             </li>
                             }

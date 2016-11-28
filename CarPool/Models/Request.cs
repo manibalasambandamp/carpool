@@ -15,6 +15,8 @@ namespace CarPool.Models
 
         public string requestor { get; set; }
 
+        public Boolean isAccepted { get; set; }
+
         [Required]
         [DisplayName("From Address")]
         public string fromAddress { get; set; }
@@ -55,11 +57,11 @@ namespace CarPool.Models
         [Range(0, 23, ErrorMessage = "Please enter between 0 and 23")]
         public int startTime { get; set; }
 
-        public static ValidationResult ValidateEndDate(Pool pool, ValidationContext context)
+        public static ValidationResult ValidateEndDate(Request request, ValidationContext context)
         {
-            if (!pool.isDaily)
+            if (!request.isDaily)
                 return ValidationResult.Success;
-            if (pool.endDate < pool.startDate)
+            if (request.endDate < request.startDate)
                 return new ValidationResult("End date cannot be less than start date");
             return ValidationResult.Success;
         }
