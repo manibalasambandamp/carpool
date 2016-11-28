@@ -21,18 +21,7 @@ namespace CarPool.Controllers
         [AllowAnonymous]
         public ActionResult About()
         {
-            string msg = "";
-            try
-            {
-                HelloWorldServiceClient client = new HelloWorldServiceClient();
-                msg = client.GetMessage("Mike Liu");
-            }
-            catch (Exception e)
-            {
-                ViewBag.Message = "Your application description page.";
-                return View();
-            }
-            ViewBag.Message = msg;
+            ViewBag.Message = "Your application description page.";
 
             return View();
         }

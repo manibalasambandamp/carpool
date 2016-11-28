@@ -181,13 +181,27 @@ namespace CarPool.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
+                    //Sending Welcome Mail for new user registration
+                    string webServiceMsg = "";
+                    try
+                    {
+                        String subject = "Welcome " + model.Name + " !!!!!!";
+                        String content = "Hi " + model.Name + ",\n\tWe hope you are having an amazing day!\n\nTo help you make the most of your time on wheelshare, we would like to remind you of our core features:\n1.Creating a pool\n2.Making a pool request\n3.Creating a private group.\nThanks for Joining and Happy sharing!\nThe WheelShare Team";
+                        webServiceMsg += model.Email + "#" + subject + "#" + content;
+                        HelloWorldServiceClient client = new HelloWorldServiceClient();
+                        client.GetMessage(webServiceMsg);
+                    }
+                    catch (Exception e)
+                    {
+                       //do nothing
+                    }
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
