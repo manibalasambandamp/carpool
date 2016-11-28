@@ -21,6 +21,8 @@ namespace CarPool.Models
             }
 
              public DbSet<Pool> Pools { get; set; }
+
+        public System.Data.Entity.DbSet<CarPool.Models.Request> Requests { get; set; }
     }
     
 }

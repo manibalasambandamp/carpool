@@ -15,6 +15,7 @@ namespace CarPool.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
+            
             return View();
         }
         [AllowAnonymous]
