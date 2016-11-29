@@ -15,7 +15,10 @@ namespace CarPool.Models
 
         public string requestor { get; set; }
 
+        [DisplayName("Accept status")]
         public Boolean isAccepted { get; set; }
+
+        public string acceptor { get; set; }
 
         [Required]
         [DisplayName("From Address")]

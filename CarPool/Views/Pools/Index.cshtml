@@ -128,17 +128,30 @@
                             @Html.DisplayFor(modelItem => item1.startTime)
                         </td>
                             @{
-                                String members = String.IsNullOrEmpty(item1.members) ? "" : item1.members;
-                                int seats = item1.seatsToOffer - (members.Split('#').Length - 1);
+                                int seats = item1.seatsToOffer;
+                                if(!String.IsNullOrEmpty(item1.members)) {
+                                    seats = item1.seatsToOffer - (item1.members.Split('#').Length);
+                                }
+
                                 <td>
                                     @seats
                                 </td>
                             }
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item1.Id }) |
-                            @Html.ActionLink("Details", "Details", new { id = item1.Id }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item1.Id })
-                        </td>
+                        @if (item1.members == null)
+                        {
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item1.Id }) |
+                                @Html.ActionLink("Details", "Details", new { id = item1.Id }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item1.Id })
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @Html.ActionLink("Details", "Details", new { id = item1.Id }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item1.Id })
+                            </td>
+                        }
                     </tr>
                                     }
                                 }
@@ -227,9 +240,11 @@
                                 @Html.DisplayFor(modelItem => item2.startTime)
                             </td>
                             @{
-                                String members = String.IsNullOrEmpty(item2.members) ? "" : item2.members;
-                                int seats = item2.seatsToOffer - (members.Split('#').Length - 1);
-
+                                int seats = item2.seatsToOffer;
+                                if (!String.IsNullOrEmpty(item2.members))
+                                {
+                                    seats = item2.seatsToOffer - (item2.members.Split('#').Length);
+                                }
                                 <td>
                                     @seats
                                 </td>

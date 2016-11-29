@@ -132,7 +132,7 @@
                             
                         </td>
                     }
-                    else if((""+item.members).Split('#').Length < item.seatsToOffer)
+                    else if((""+item.members).Split('#').Length < item.seatsToOffer || item.members == null)
                     {
                         <td>
                             @Html.ActionLink("Details", "Details", new { id = item.Id })|

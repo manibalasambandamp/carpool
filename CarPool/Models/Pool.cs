@@ -14,7 +14,10 @@ namespace CarPool.Models
 
         public int Id { get; set; }
 
+        [DisplayName("Host Name")]
         public string host { get; set; }
+
+        public int? requestId { get; set; }
 
         public string members { get; set; }
 
@@ -46,6 +49,7 @@ namespace CarPool.Models
 
         [Required]
         [DisplayName("Seats to offer")]
+        [Range(1,10, ErrorMessage = "Please enter between 1 and 10")]
         public int seatsToOffer { get; set; }
 
 

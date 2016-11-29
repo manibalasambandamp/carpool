@@ -181,9 +181,6 @@ namespace CarPool.Controllers
         public ActionResult Offer(int? id)
         {
             Request request = db.Requests.FirstOrDefault(r => r.Id == id);
-            request.isAccepted = true;
-            db.Entry(request).State = EntityState.Modified;
-            db.SaveChanges();
 
             Pool pool = new Pool();
             pool.fromAddress = request.fromAddress;
@@ -194,10 +191,39 @@ namespace CarPool.Controllers
             pool.endDate = request.endDate;
             pool.isDaily = request.isDaily;
             pool.startTime = request.startTime;
+            pool.requestId = request.Id;
 
-           // return RedirectToAction( "Create", "Pools",pool);
+            // return RedirectToAction( "Create", "Pools", new { pool = pool, a = 1 });
+            return View(pool);
+           // return View(  "../Pools/Create", pool);
+        }
 
-            return View( "../Pools/Create", pool);
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Offer([Bind(Include = "Id,fromAddress,fromZip,toAddress,toZip,carType,carNumber,seatsToOffer,isDaily,startDate,endDate,startTime,requestId")] Pool pool)
+        {
+            if (ModelState.IsValid)
+            {
+                pool.host = User.Identity.Name;
+
+                if (pool.requestId != null)
+                {
+                    Request request = db.Requests.FirstOrDefault(r => r.Id == pool.requestId);
+                    request.acceptor = User.Identity.Name;
+                    request.isAccepted = true;
+                    db.Entry(request).State = EntityState.Modified;
+                    db.SaveChanges();
+                    var user = db.Users.FirstOrDefault(p => p.UserName == request.requestor);
+                    pool.members = request.requestor + "," + user.PhoneNum;
+                }
+
+                db.Pools.Add(pool);
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            return View(pool);
         }
 
         protected override void Dispose(bool disposing)

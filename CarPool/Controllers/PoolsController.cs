@@ -17,17 +17,15 @@ namespace CarPool.Controllers
 
         // GET: Pools
         public ActionResult Index()
-
-
         {
             var hostedPools = db.Pools.Where(p => p.host == User.Identity.Name);
-        var joinedPools = db.Pools.Where(p => p.members.Contains(User.Identity.Name));
-        IEnumerable<Pool> poolList = new List<Pool>();
-        poolList = poolList.Concat(hostedPools.ToList());
+            var joinedPools = db.Pools.Where(p => p.members.Contains(User.Identity.Name));
+            IEnumerable<Pool> poolList = new List<Pool>();
+            poolList = poolList.Concat(hostedPools.ToList());
             poolList = poolList.Concat(joinedPools.ToList());
 
             return View(poolList);
-    }
+        }
 
 
         // GET: Pools/Details/5
@@ -64,6 +62,7 @@ namespace CarPool.Controllers
                 pool.host = User.Identity.Name;
                 db.Pools.Add(pool);
                 db.SaveChanges();
+                
                 return RedirectToAction("Index");
             }
 
@@ -195,7 +194,8 @@ namespace CarPool.Controllers
         public ActionResult Join(int? id) {
             Pool pool = db.Pools.FirstOrDefault(p => p.Id == id);
             var user=db.Users.FirstOrDefault(p => p.UserName == User.Identity.Name);
-            pool.members = pool.members + "#" + User.Identity.Name + "," +user.PhoneNum;
+            String memberDetail = (User.Identity.Name + "," + user.PhoneNum);
+            pool.members = (String.IsNullOrWhiteSpace(pool.members)) ? memberDetail :( pool.members + "#" + memberDetail);
             db.Entry(pool).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Details", new { id = pool.Id });

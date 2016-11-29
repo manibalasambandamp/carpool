@@ -73,7 +73,25 @@
         <dd>
             @Html.DisplayFor(model => model.startTime)
         </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.isAccepted)
+        </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.isAccepted)
+        </dd>
+        @if (Model.isAccepted)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.acceptor)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.acceptor)
+            </dd>
+            
+        }
     </dl>
 </div>
 <p>

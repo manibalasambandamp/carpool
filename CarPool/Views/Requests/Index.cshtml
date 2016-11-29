@@ -64,11 +64,19 @@
         <td>
             @Html.DisplayFor(modelItem => item.startTime)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
+        @if (!item.isAccepted)
+        {
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        }
+        else {
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
+            </td>
+        }
     </tr>
 }
 

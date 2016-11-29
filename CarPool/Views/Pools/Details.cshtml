@@ -99,19 +99,31 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.host)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.host)
+        </dd>
+
+        <dt>
             Seats Available
         </dt>
 
 
         @{
-            String members = String.IsNullOrEmpty(Model.members) ? "" : Model.members;
-            int seats = Model.seatsToOffer - (members.Split('#').Length - 1);
+            int seats = Model.seatsToOffer;
+            if (!String.IsNullOrEmpty(Model.members))
+            {
+                seats = Model.seatsToOffer - (Model.members.Split('#').Length);
+            }
             <dd>
                 @seats
             </dd>
         }
     </dl>
 </div>
+<h5>Pool Members</h5>
 <table>
     <tr>
         <th>
@@ -130,29 +142,36 @@
                 <tr><td>No one has joined the car pool yet</td></tr>
             }
             else
-            { 
-            String[] users = Model.members.Split('#');
-
-            for (int i = 0; i < users.Length; i++)
             {
-                String[] usersNum = users[i].Split(',');
-        <tr>
-            <td>
-                @usersNum[0]
-            </td>
-      
-          
-            <td>
-                @usersNum[1];
-            </td>
-        </tr>
+                String[] users = Model.members.Split('#');
 
+                for (int i = 0; i < users.Length; i++)
+                {
+                    String[] usersNum = users[i].Split(',');
+                    if (usersNum.Length ==2)
+                    {
+                        <tr>
+                            <td>
+                                @usersNum[0]
+                            </td>
+                            <td>
+                                @usersNum[1]
+                            </td>
+                        </tr>
+
+                    }
                 }
             }
         }
       </table>
-          
-        <p>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+          @if (Model.members == null)
+          {
+                <p>
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+                    @Html.ActionLink("Back to List", "Index")
+                </p>
+          }
+          else
+          {
             @Html.ActionLink("Back to List", "Index")
-        </p>
+          }
