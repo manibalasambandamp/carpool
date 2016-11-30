@@ -207,6 +207,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\HelloWorldServiceRef.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -249,11 +250,14 @@
     <Content Include="Images\hand.jpg" />
     <Content Include="Images\man-asking-for-lift.jpg" />
     <Content Include="Images\nexus2cee_unnamed6.png" />
+    <Content Include="Images\Oops.png" />
+    <Content Include="Images\page_under_construction.png" />
     <Content Include="Images\petropump-1024_217275k.jpg" />
     <Content Include="Images\roadtrip.jpg" />
     <Content Include="Images\save-bear.jpg" />
     <Content Include="Images\save-earth.jpg" />
     <Content Include="Images\nobody.jpg" />
+    <Content Include="Images\underconstruction.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -320,6 +324,7 @@
     <Content Include="Views\Requests\Index.cshtml" />
     <Content Include="Views\Requests\Search.cshtml" />
     <Content Include="Views\Requests\Offer.cshtml" />
+    <Content Include="Views\Groups\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

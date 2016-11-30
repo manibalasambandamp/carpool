@@ -4,11 +4,17 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Index - Requests</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@if (Model.Count() == 0)
+{
+    <h5>You have not made any requests yet.</h5>
+}
+else
+{
 <table class="table">
     <tr>
         <th>
@@ -38,7 +44,8 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.fromAddress)
@@ -72,7 +79,8 @@
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         }
-        else {
+        else
+        {
             <td>
                 @Html.ActionLink("Details", "Details", new { id = item.Id })
             </td>
@@ -81,3 +89,4 @@
 }
 
 </table>
+}
